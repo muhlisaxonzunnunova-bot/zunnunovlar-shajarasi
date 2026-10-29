@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zunnunovlar oila daraxti</title>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8f3f1;--panel:#fff;--ink:#14204d;--mute:#53608f;--branch:#1a8f85;--c1:#c98a14;--c2:#16847b;--c3:#c4304b;--saf:#e0a02e;--line:#14204d22;--g1:#2bb3a666;--g2:#e0a02e66;--g3:#d6405a3a;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10183a;--panel:#1b2656;--ink:#f1ead9;--mute:#aab3d6;--branch:#2bb3a6;--c1:#e0a02e;--c2:#22a095;--c3:#d6405a;--line:#ffffff22;--g1:#2bb3a655;--g2:#d6405a55;--g3:#e0a02e3a}}
+:root[data-theme="dark"]{--bg:#10183a;--panel:#1b2656;--ink:#f1ead9;--mute:#aab3d6;--branch:#2bb3a6;--c1:#e0a02e;--c2:#22a095;--c3:#d6405a;--line:#ffffff22;--g1:#2bb3a655;--g2:#d6405a55;--g3:#e0a02e3a}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 Manrope,system-ui,sans-serif;display:flex;flex-direction:column;
+ background-image:radial-gradient(900px 650px at 12% 0%,var(--g1),transparent 65%),radial-gradient(800px 600px at 95% 100%,var(--g2),transparent 65%),radial-gradient(600px 420px at 75% 15%,var(--g3),transparent 65%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23888' stroke-opacity='.2' stroke-width='1.5'%3E%3Cpath d='M40 6 74 40 40 74 6 40Z'/%3E%3Cpath d='M40 22 58 40 40 58 22 40Z'/%3E%3Ccircle cx='40' cy='40' r='5'/%3E%3C/g%3E%3C/svg%3E");background-attachment:fixed}
+header{padding:14px 18px 10px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;background:none}
+h1{font:400 clamp(26px,5vw,42px)/1.05 "Yeseva One",Georgia,serif;margin:0;letter-spacing:.01em}
+h1 small{display:block;font:400 13px Manrope,sans-serif;color:var(--mute);margin-top:4px;letter-spacing:0}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input,textarea,button{font:inherit;color:var(--ink)}
+input,textarea{background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:8px 11px;width:100%}
+.tools input{width:170px}
+button{background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:8px 13px;cursor:pointer;font-weight:600}
+button:hover{border-color:var(--branch)}
+button.on{background:var(--saf);border-color:var(--saf);color:#14204d}
+:focus-visible{outline:3px solid var(--saf);outline-offset:2px}
+#stage{flex:1;overflow:auto;position:relative}
+svg{display:block;margin:0 auto}
+.br{fill:none;stroke:var(--branch);stroke-linecap:round}
+.grow .br{stroke-dasharray:1;stroke-dashoffset:1;animation:g 1.3s cubic-bezier(.3,.7,.2,1) forwards;animation-delay:calc(var(--d)*.5s)}
+.grow .nd-wrap{opacity:0;transform-box:fill-box;transform-origin:center;animation:p .6s ease forwards;animation-delay:calc(var(--d)*.5s + .5s)}
+@keyframes g{to{stroke-dashoffset:0}}
+@keyframes p{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.nd{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:opacity .2s}
+.nd.dim{opacity:.18}
+.nd .m{stroke:var(--panel);stroke-width:4;transition:stroke .15s}
+.nd:hover .m{stroke:var(--saf)}
+.nd.sel .m{stroke:var(--saf);stroke-width:6}
+.ini{fill:#fff;font:400 22px "Yeseva One",Georgia,serif;text-anchor:middle;pointer-events:none}
+.lbl{fill:var(--ink);font:700 13px Manrope,sans-serif;text-anchor:middle;pointer-events:none}
+.yr{fill:var(--mute);font:400 11px Manrope,sans-serif;text-anchor:middle;pointer-events:none}
+.ring{fill:var(--saf);stroke:var(--panel);stroke-width:3}
+aside{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100% - 28px));max-height:70dvh;overflow:auto;background:var(--panel);border:1.5px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 40px #0004}
+aside[hidden],#ed[hidden]{display:none}
+aside h2{font:400 26px/1.1 "Yeseva One",Georgia,serif;margin:0 28px 4px 0}
+aside p{margin:4px 0;color:var(--mute)}
+#close{position:absolute;top:10px;right:10px;padding:2px 10px;font-size:20px}
+#ed{margin-top:14px;display:grid;gap:10px}
+#ed label{display:grid;gap:4px;font-size:13px;font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+dialog{background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:18px;width:min(560px,92vw);padding:18px}
+dialog::backdrop{background:#0008}
+dialog textarea{height:240px;font:12px/1.4 ui-monospace,monospace}
+dialog p{color:var(--mute);margin:0 0 10px}
+@media(prefers-reduced-motion:reduce){.grow .br,.grow .nd-wrap{animation:none;stroke-dasharray:none;stroke-dashoffset:0;opacity:1}}
+</style>
+</head>
+<body>
+<header>
+ <h1>Zunnunovlar oila daraxti<small>Ildizlardan novdalargacha. Biror kishini bosing.</small></h1>
+ <div class="tools">
+  <input id="q" type="search" placeholder="Ism qidirish" aria-label="Ism qidirish">
+  <button id="zo" aria-label="Kichraytirish">−</button><button id="zi" aria-label="Kattalashtirish">+</button>
+  <button id="te">Tahrirlash</button><button id="ex">Maʼlumotlar</button>
+ </div>
+</header>
+<div id="stage"><svg id="t"></svg></div>
+<aside id="panel" hidden>
+ <button id="close" aria-label="Yopish">×</button>
+ <h2 id="pn"></h2><p id="py"></p><p id="pnote"></p>
+ <div id="ed" hidden>
+  <label>Ism<input id="fn"></label>
+  <label>Yillar<input id="fy" placeholder="1950 – 2020"></label>
+  <label>Izoh<textarea id="fnote" rows="2"></textarea></label>
+  <div class="row"><button id="addc">+ Farzand</button><button id="adds">+ Turmush oʻrtogʻi</button><button id="del">Oʻchirish</button></div>
+ </div>
+</aside>
+<dialog id="dlg">
+ <p>Tahrirlar faqat shu brauzeringizda saqlanadi. Hammaga koʻrinishi uchun bu matnni nusxalab, sayt yaratuvchisiga yuboring.</p>
+ <textarea id="jt" readonly></textarea>
+ <div class="row" style="margin-top:10px"><button id="cp">Nusxalash</button><button id="rs">Boshlangʻichga qaytarish</button><button id="cl">Yopish</button></div>
+</dialog>
+
+<script>
+// ====== OILA MAʼLUMOTLARI (namuna: oʻzingiznikiga almashtiring) ======
+const K=(name,years)=>({name,years:years||"",note:""});
+const DEFAULT={...K("Zufnun Zunnunov","1909 – 1989"),
+ spouse:K("Karima Zunnunova","1916 – 1996"),
+ children:[
+  {...K("Sayyora Mansurova","1941"),children:["Sobirxon","Dilorom","Nargiza","Sevara","Saida","Saodat","Movluda","Husan","Zahro","Dilbar"].map(n=>K(n))},
+  {...K("Hosiyat","1948 – 2023"),children:[K("Sayfiddin","1968"),K("Shohida","1970"),K("Shohista","1974")]},
+  {...K("Shobarnoxon Zunnunov","1951"),children:[
+    {...K("Toxira Ziyamatova","1974"),children:[K("Umida"),K("Abdurauf"),K("Abdurashid"),K("Abduqodir")]},
+    {...K("Noila Tolaganova","1976"),children:[K("Otabek"),K("Kamronbek")]},
+    {...K("Shoyaxyo Zunnunov","1978"),children:[K("Karimaxon","1999"),K("Komilaxon","2002"),K("Robiyaxon","2010")]},
+    {...K("Shorasul Zunnunov","1981"),children:[K("Muhlisaxon","2008"),K("Muhsinaxon","2012"),K("Mariyamxon","2017"),K("Muhammad Fotix","2022"),K("Munisaxon","2024")]}]},
+  {...K("Shomurod Zunnunov","1952"),children:[K("Shomansur Zunnunov","1979"),K("Nilufar","1980"),K("Shomaqsud Zunnunov","1981"),K("Lobar Zunnunova","1984")]}
+ ]};
+// =====================================================================
+const KEY="oila-daraxti-v2",$=s=>document.querySelector(s);
+let data=DEFAULT;
+try{const s=localStorage.getItem(KEY);if(s)data=JSON.parse(s)}catch(e){}
+let sel=null,edit=false,zoom=.8,first=true,uid=0,idx=new Map(),query="";
+const GX=20,GY=190,UW=190,COL=["var(--c1)","var(--c2)","var(--c3)"];
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const walk=(n,f,p)=>{f(n,p);(n.children||[]).forEach(c=>walk(c,f,n))};
+const clean=()=>JSON.stringify(data,(k,v)=>["x","w","d","cw","id"].includes(k)?undefined:v,1);
+const save=()=>{try{localStorage.setItem(KEY,clean())}catch(e){}};
+
+function measure(n){
+  const ks=n.children||[];
+  n.cw=ks.reduce((s,c)=>s+measure(c)+GX,-GX);
+  if(!ks.length)n.cw=0;
+  return n.w=Math.max(n.spouse?170:100,n.cw);
+}
+function place(n,x0,d){
+  n.x=x0+n.w/2;n.d=d;
+  let cx=x0+(n.w-n.cw)/2;
+  (n.children||[]).forEach(c=>{place(c,cx,d+1);cx+=c.w+GX});
+}
+const first1=s=>esc(String(s||"").split(" ")[0]);
+function med(x,y,r,p,id,who,col){
+  const hit=!query||p.name.toLowerCase().includes(query);
+  return `<g class="nd${hit?"":" dim"}${sel&&sel.n.id===id&&sel.who===who?" sel":""}" data-id="${id}" data-w="${who}" tabindex="0" role="button" aria-label="${esc(p.name)}">
+  <circle class="m" cx="${x}" cy="${y}" r="${r}" fill="${col}"/><text class="ini" x="${x}" y="${y+8}">${esc((p.name||"?")[0])}</text>
+  <text class="lbl" x="${x}" y="${y+r+18}">${first1(p.name)}</text><text class="yr" x="${x}" y="${y+r+33}">${esc(p.years)}</text></g>`;
+}
+function render(){
+  idx.clear();walk(data,n=>{n.id=n.id||"n"+(++uid);idx.set(n.id,n)});
+  measure(data);place(data,60,0);
+  let D=0;walk(data,n=>D=Math.max(D,n.d));
+  const W=data.w+120,H=D*GY+190,Y=d=>80+d*GY;
+  let br="",nd="";
+  walk(data,(n,p)=>{
+    const y=Y(n.d),col=COL[n.d%3];
+    if(p){
+      const sy=Y(p.d)+68,ey=y-36,m=(sy+ey)/2,sw=Math.max(2.5,10-n.d*2);
+      br+=`<path class="br" pathLength="1" style="--d:${n.d}" stroke-width="${sw}" d="M${p.x} ${sy}C${p.x} ${m},${n.x} ${m},${n.x} ${ey}"/>`;
+    }
+    if(n.spouse){
+      nd+=`<g style="--d:${n.d}" class="pair">`+med(n.x-46,y,30,n,n.id,"p",col)+med(n.x+46,y,30,n.spouse,n.id,"s",COL[(n.d+1)%3])+`<circle class="ring" cx="${n.x}" cy="${y}" r="8"/></g>`;
+    }else nd+=`<g style="--d:${n.d}">`+med(n.x,y,32,n,n.id,"p",col)+`</g>`;
+  });
+  nd=nd.replace(/<g style="--d:(\d+)"/g,'<g class="nd-wrap" style="--d:$1"');
+  const t=$("#t");
+  t.setAttribute("viewBox",`0 0 ${W} ${H}`);t.setAttribute("width",W*zoom);t.setAttribute("height",H*zoom);
+  t.setAttribute("class",first?"grow":"");
+  t.innerHTML=br+nd;
+  if(first){
+    const s=$("#stage");s.scrollLeft=(s.scrollWidth-s.clientWidth)/2;first=false;
+  }
+}
+const person=()=>sel&&(sel.who==="s"?sel.n.spouse:sel.n);
+function fillPanel(){
+  const p=person();$("#panel").hidden=!p;if(!p)return;
+  $("#pn").textContent=p.name;$("#py").textContent=p.years||"";$("#pnote").textContent=p.note||"";
+  $("#ed").hidden=!edit;
+  if(edit){$("#fn").value=p.name;$("#fy").value=p.years||"";$("#fnote").value=p.note||"";
+    $("#adds").hidden=!!sel.n.spouse||sel.who==="s";$("#addc").hidden=false;$("#del").hidden=sel.who==="p"&&sel.n===data;}
+}
+function pick(id,who){sel={n:idx.get(id),who};fillPanel();render()}
+$("#t").addEventListener("click",e=>{const g=e.target.closest("[data-id]");if(g)pick(g.dataset.id,g.dataset.w)});
+$("#t").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){const g=e.target.closest("[data-id]");if(g){e.preventDefault();pick(g.dataset.id,g.dataset.w)}}});
+$("#close").onclick=()=>{sel=null;fillPanel();render()};
+[["#fn","name"],["#fy","years"],["#fnote","note"]].forEach(([s,k])=>$(s).addEventListener("input",e=>{
+  const p=person();if(!p)return;p[k]=e.target.value;
+  if(k==="name"){$("#pn").textContent=p.name}else if(k==="years")$("#py").textContent=p.years;else $("#pnote").textContent=p.note;
+  save();render()}));
+$("#addc").onclick=()=>{const c={name:"Yangi aʼzo",years:"",note:""};(sel.n.children=sel.n.children||[]).push(c);save();render();pick(c.id,"p")};
+$("#adds").onclick=()=>{sel.n.spouse={name:"Turmush oʻrtogʻi",years:"",note:""};sel.who="s";save();fillPanel();render()};
+$("#del").onclick=()=>{
+  if(sel.who==="s")sel.n.spouse=null;
+  else walk(data,(n,p)=>{if(n===sel.n&&p)p.children=p.children.filter(c=>c!==n)});
+  sel=null;save();fillPanel();render()};
+$("#te").onclick=e=>{edit=!edit;e.target.classList.toggle("on",edit);e.target.textContent=edit?"Tayyor":"Tahrirlash";fillPanel()};
+$("#zi").onclick=()=>{zoom=Math.min(2,zoom+.2);render()};
+$("#zo").onclick=()=>{zoom=Math.max(.4,zoom-.2);render()};
+$("#q").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();render();
+  if(query){walk(data,n=>{});const hit=[...document.querySelectorAll(".nd:not(.dim)")][0];if(hit)hit.scrollIntoView({block:"center",inline:"center",behavior:"smooth"})}});
+$("#ex").onclick=()=>{$("#jt").value=clean();$("#dlg").showModal()};
+$("#cl").onclick=()=>$("#dlg").close();
+$("#cp").onclick=async()=>{try{await navigator.clipboard.writeText($("#jt").value)}catch(e){$("#jt").select()}$("#cp").textContent="Nusxalandi"};
+$("#rs").onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
+render();
+</script>
+</body>
+</html>
